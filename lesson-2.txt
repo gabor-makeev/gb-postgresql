@@ -1,0 +1,188 @@
+-- user is postgres
+CREATE DATABASE vk;
+GRANT ALL PRIVILEGES ON DATABASE vk to gb_user;
+
+-- user is gb_user
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	email VARCHAR(120) NOT NULL UNIQUE,
+	phone VARCHAR(15) UNIQUE,
+	main_photo_id INT,
+	created_at TIMESTAMP
+);
+
+CREATE TABLE messages (
+	id SERIAL PRIMARY KEY,
+	from_user_id INT NOT NULL,
+	to_user_id INT NOT NULL,
+	body TEXT,
+	is_important BOOLEAN,
+	is_delivered BOOLEAN,
+	created_at TIMESTAMP
+);
+
+CREATE TABLE friendship (
+	id SERIAL PRIMARY KEY,
+	requested_by_user_id INT NOT NULL,
+	requested_to_user_id INT NOT NULL,
+	status_id INT NOT NULL,
+	requested_at TIMESTAMP,
+	confirmed_at TIMESTAMP
+);
+
+CREATE TABLE friendship_statuses (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(30) UNIQUE
+);
+
+CREATE TABLE communities (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(120) UNIQUE,
+	creator_id INT NOT NULL,
+	created_at TIMESTAMP
+);
+
+CREATE TABLE communities_users (
+	community_id INT NOT NULL,
+	user_id INT NOT NULL,
+	created_at TIMESTAMP,
+	PRIMARY KEY (community_id, user_id)
+);
+
+CREATE TABLE photo (
+	id SERIAL PRIMARY KEY,
+	url VARCHAR(250) NOT NULL UNIQUE,
+	owner_id INT NOT NULL,
+	description VARCHAR(250) NOT NULL,
+	uploaded_at TIMESTAMP NOT NULL,
+	size INT NOT NULL
+);
+
+CREATE TABLE video (
+	id SERIAL PRIMARY KEY,
+	url VARCHAR(250) NOT NULL UNIQUE,
+	owner_id INT NOT NULL,
+	description VARCHAR(250) NOT NULL,
+	uploaded_at TIMESTAMP NOT NULL,
+	size INT NOT NULL
+);
+
+-- commands for fake data generated via https://generatedata.com/
+DROP TABLE IF EXISTS "users";
+
+CREATE TABLE "users" (
+  id SERIAL PRIMARY KEY,
+  first_name varchar(255) default NULL,
+  last_name varchar(255) default NULL,
+  email varchar(255) default NULL,
+  phone varchar(100) default NULL,
+  main_photo_id integer NULL,
+  created_at varchar(255)
+);
+
+INSERT INTO users (first_name,last_name,email,phone,main_photo_id,created_at)
+VALUES
+  ('Vance','Munoz','aenean@protonmail.couk','398-8818',88,'2024-03-01 01:58:48'),
+  ('Lance','Bowman','ac@aol.com','385-1771',35,'2023-05-10 19:04:53'),
+  ('Keegan','Bates','mi.fringilla.mi@google.ca','1-637-152-3731',8,'2022-10-11 03:44:27'),
+  ('Darryl','Snow','euismod.et@icloud.net','397-5462',45,'2023-09-25 04:33:00'),
+  ('Yoko','Sims','nostra.per.inceptos@aol.com','655-1605',93,'2022-09-07 01:11:08'),
+  ('Evelyn','Watson','praesent@hotmail.com','259-6757',48,'2022-07-23 06:11:26'),
+  ('Herman','Mcintosh','a.dui.cras@google.org','1-672-761-5154',97,'2022-05-12 20:17:36'),
+  ('Levi','Blanchard','dolor@yahoo.org','961-5551',43,'2022-09-28 04:20:32'),
+  ('Kylan','Bray','sem.magna.nec@icloud.edu','595-3180',4,'2024-03-16 02:55:15'),
+  ('Quamar','Lancaster','lobortis.tellus@hotmail.org','1-372-139-8317',29,'2024-02-28 03:33:56'),
+  ('Felix','Craft','nec.tempus@yahoo.couk','1-687-345-3450',34,'2023-06-26 11:05:17'),
+  ('Paki','Clayton','et.rutrum.eu@outlook.com','342-1577',20,'2022-05-08 00:08:06'),
+  ('Karina','Nolan','dictum@yahoo.ca','1-506-988-1064',19,'2022-12-15 15:03:22'),
+  ('Idola','Hudson','sed.est@protonmail.com','1-524-930-1558',53,'2023-09-11 13:55:34'),
+  ('Talon','Melton','velit@google.com','565-6483',31,'2023-12-23 06:55:59'),
+  ('Kameko','Rosa','odio.tristique.pharetra@aol.edu','1-742-728-2115',22,'2023-11-13 11:56:26'),
+  ('Ezra','Benjamin','porttitor.interdum.sed@protonmail.org','483-8867',57,'2023-12-19 07:07:44'),
+  ('Illiana','Finley','justo.nec@hotmail.net','258-1122',92,'2023-08-05 10:39:43'),
+  ('Maile','Bruce','in.tempus.eu@google.edu','861-1802',73,'2022-05-04 09:33:26'),
+  ('Kyra','Mcclain','natoque.penatibus@icloud.edu','326-1180',40,'2023-02-26 23:18:07'),
+  ('Justin','Sawyer','dis@aol.org','1-149-628-7242',42,'2023-04-13 07:06:17'),
+  ('Zenia','Rogers','elit@protonmail.com','244-5793',10,'2023-09-20 20:54:04'),
+  ('Jena','Santos','nascetur.ridiculus@google.net','645-8855',43,'2023-10-13 06:16:32'),
+  ('Shafira','Delgado','sagittis.duis@yahoo.com','1-652-914-9763',72,'2023-04-03 17:56:37'),
+  ('Howard','Mcdaniel','proin.nisl@aol.edu','1-582-875-8837',56,'2023-04-08 12:26:33'),
+  ('Amaya','Reed','urna@hotmail.net','717-7795',59,'2024-01-03 02:49:01'),
+  ('Melissa','Wyatt','accumsan.convallis@outlook.ca','248-7856',64,'2022-06-16 21:14:58'),
+  ('Galena','Sampson','pellentesque.eget@icloud.org','1-541-303-5348',67,'2022-11-16 01:17:10'),
+  ('Galvin','Gallegos','sem.pellentesque@hotmail.org','306-5128',26,'2022-04-30 08:44:22'),
+  ('Christian','Salas','fusce.feugiat@protonmail.net','654-2151',74,'2023-05-14 23:50:13'),
+  ('Lucas','Cox','volutpat.nulla@outlook.com','449-8783',96,'2023-01-15 02:50:15'),
+  ('Raven','Juarez','orci.ut@yahoo.com','194-1675',22,'2023-06-09 12:35:05'),
+  ('Christian','Neal','dictum.eleifend@yahoo.net','1-627-514-6153',40,'2022-12-17 20:59:35'),
+  ('Lacy','Kerr','vel.pede@icloud.org','482-5148',63,'2023-05-16 14:59:59'),
+  ('Alvin','Fowler','dolor.quisque@icloud.ca','1-775-111-3695',62,'2023-10-28 15:05:40'),
+  ('Gannon','Decker','vitae.erat.vel@protonmail.couk','1-823-342-2247',80,'2022-05-26 17:24:54'),
+  ('Emerson','Pugh','sit.amet.consectetuer@hotmail.com','1-817-653-8331',86,'2022-05-25 14:29:06'),
+  ('Ishmael','Rush','velit.egestas@protonmail.edu','261-2876',30,'2022-09-24 23:53:13'),
+  ('Lester','Glass','nullam.scelerisque@google.org','1-306-222-2632',57,'2022-09-15 18:59:24'),
+  ('Connor','Short','porttitor@icloud.com','671-6168',35,'2022-07-26 10:45:36'),
+  ('Mallory','Parsons','purus.maecenas@google.org','1-157-300-1456',95,'2023-12-03 16:40:44'),
+  ('Felicia','Ware','egestas.ligula.nullam@aol.couk','1-244-503-3476',83,'2023-04-12 09:48:02'),
+  ('Holly','Ramirez','lorem@hotmail.edu','1-322-993-0443',9,'2022-04-19 12:21:12'),
+  ('Edan','Osborne','senectus.et@hotmail.ca','788-9272',96,'2023-06-26 22:20:26'),
+  ('Veronica','Guerrero','tellus@protonmail.edu','1-224-478-2213',42,'2022-09-28 15:14:53'),
+  ('Carla','Clarke','euismod@icloud.net','1-831-171-3768',96,'2023-01-17 07:56:10'),
+  ('Jorden','Moss','aliquet.magna.a@hotmail.org','613-3803',18,'2022-09-26 09:37:49'),
+  ('Mufutau','Farrell','ac.arcu.nunc@aol.org','349-2310',35,'2022-07-02 08:47:37'),
+  ('Curran','White','cras.convallis@google.ca','315-3410',22,'2023-04-27 10:10:01'),
+  ('Cameran','Trujillo','luctus.aliquet@google.ca','258-4771',42,'2022-12-02 23:13:36');
+INSERT INTO users (first_name,last_name,email,phone,main_photo_id,created_at)
+VALUES
+  ('Zorita','Soto','tellus@outlook.couk','1-796-442-5712',29,'2024-02-19 23:25:53'),
+  ('Quamar','Duran','nullam.velit.dui@hotmail.com','663-1144',100,'2022-06-13 14:17:03'),
+  ('Moses','Juarez','id.enim.curabitur@google.ca','1-844-866-4562',21,'2023-04-04 23:48:33'),
+  ('Jordan','Fry','nunc@outlook.com','137-0428',55,'2022-08-04 13:00:03'),
+  ('Dean','Warren','eu@google.org','1-468-507-1223',68,'2022-09-14 10:47:22'),
+  ('Scott','Acevedo','placerat.eget@aol.ca','1-338-203-5265',28,'2023-08-31 18:10:15'),
+  ('Tashya','Sparks','donec.feugiat@hotmail.ca','397-5439',93,'2024-01-27 19:10:26'),
+  ('Hannah','Collier','placerat.orci@protonmail.edu','1-770-422-4242',42,'2023-05-03 07:51:44'),
+  ('Jacqueline','Cooper','proin.velit@google.com','392-4912',71,'2024-02-05 02:35:15'),
+  ('Daryl','Humphrey','id.sapien.cras@outlook.edu','743-7414',90,'2022-05-16 23:44:10'),
+  ('Celeste','Fulton','semper@icloud.ca','583-1076',35,'2023-05-01 10:51:46'),
+  ('Winifred','Parker','sed.malesuada@protonmail.com','721-2183',39,'2023-10-28 23:58:37'),
+  ('Myra','Dawson','nulla.tempor@icloud.ca','473-6631',44,'2024-02-17 00:43:56'),
+  ('Gay','Charles','suspendisse.commodo@yahoo.com','1-268-672-7771',72,'2023-11-02 09:44:49'),
+  ('Merritt','Frederick','enim@hotmail.couk','922-7589',52,'2022-09-26 12:00:38'),
+  ('Adria','Salinas','nibh.sit.amet@yahoo.couk','488-0944',42,'2023-01-24 03:14:53'),
+  ('Palmer','Cruz','luctus.et@hotmail.edu','1-423-473-6950',62,'2023-05-25 11:15:35'),
+  ('Carlos','Byers','lectus.rutrum@yahoo.org','1-188-691-8257',99,'2024-03-27 21:31:37'),
+  ('Lewis','Melton','ipsum.nunc@aol.net','821-4118',62,'2024-04-10 21:27:01'),
+  ('Rana','Roach','per.inceptos.hymenaeos@yahoo.ca','454-2811',6,'2023-04-15 22:09:56'),
+  ('Tad','Espinoza','neque.non@yahoo.org','397-8626',27,'2022-08-06 19:06:15'),
+  ('Maris','Mccarty','nec.ligula@yahoo.com','656-0754',24,'2023-07-28 17:27:28'),
+  ('Brent','Fuentes','non.lobortis@google.couk','1-580-563-7883',19,'2024-01-14 17:24:29'),
+  ('Adam','Mcclure','pede.nec@hotmail.edu','363-9240',31,'2023-04-12 23:33:16'),
+  ('Marshall','Hubbard','egestas@google.net','582-3026',71,'2023-06-11 21:28:46'),
+  ('Kamal','Myers','ipsum.phasellus.vitae@icloud.net','1-306-677-5756',58,'2023-01-09 20:38:15'),
+  ('Kenyon','Meyers','ac.ipsum@yahoo.ca','395-2896',65,'2022-05-11 06:18:38'),
+  ('Quinn','Castaneda','vel.turpis@icloud.net','455-2675',63,'2023-06-10 19:50:09'),
+  ('Quemby','Guerrero','fusce@protonmail.ca','1-162-501-4691',98,'2023-09-03 22:18:27'),
+  ('Jason','Dunlap','dui.in@aol.com','738-5186',29,'2024-02-23 15:37:45'),
+  ('Claudia','Bell','cras.dictum@hotmail.ca','668-3073',15,'2022-05-23 00:30:04'),
+  ('Victoria','Beck','velit@yahoo.edu','444-7035',98,'2023-09-16 12:34:59'),
+  ('Wendy','Stafford','mauris.ut@aol.com','1-867-732-8271',18,'2024-02-29 16:07:18'),
+  ('Erich','White','dapibus.rutrum.justo@yahoo.org','1-607-598-4756',2,'2022-08-28 06:12:26'),
+  ('Austin','Herman','felis@outlook.net','825-9461',62,'2023-01-10 20:21:44'),
+  ('Calvin','Dickson','augue@yahoo.net','838-4547',66,'2022-09-02 22:36:53'),
+  ('Raymond','Calderon','gravida.molestie@protonmail.org','768-9082',4,'2022-07-20 23:57:34'),
+  ('Kibo','Mccormick','tortor.nibh.sit@yahoo.couk','1-856-741-6176',77,'2022-11-02 22:37:37'),
+  ('Baker','Church','non.enim@icloud.com','832-4847',38,'2023-01-10 08:57:25'),
+  ('Scott','Carroll','fringilla.donec.feugiat@yahoo.com','688-7751',25,'2023-06-21 13:53:46'),
+  ('Brenda','Briggs','sagittis.duis.gravida@google.edu','556-2335',24,'2022-06-17 18:32:26'),
+  ('Eugenia','Butler','enim@aol.net','891-3136',96,'2023-12-01 15:38:34'),
+  ('Octavius','Humphrey','fringilla.porttitor.vulputate@outlook.edu','431-3012',42,'2023-01-21 02:33:55'),
+  ('Ulla','Clayton','eleifend.nec@protonmail.ca','702-6444',6,'2022-12-30 11:25:03'),
+  ('Janna','Raymond','urna.et@protonmail.ca','512-8513',88,'2024-01-16 03:19:02'),
+  ('Camden','Bauer','massa.suspendisse.eleifend@outlook.org','1-621-757-3932',28,'2022-06-16 10:34:37'),
+  ('Barrett','Becker','nullam.vitae.diam@aol.net','1-747-453-5023',94,'2022-11-29 20:43:19'),
+  ('Lavinia','Adkins','et.eros.proin@yahoo.ca','1-641-966-4587',37,'2023-05-10 09:25:31'),
+  ('Kellie','Acevedo','lobortis.class@protonmail.org','1-818-658-5234',8,'2022-12-24 14:47:26'),
+  ('Jesse','Bishop','pulvinar.arcu.et@aol.org','782-4874',99,'2023-12-05 04:22:55');
