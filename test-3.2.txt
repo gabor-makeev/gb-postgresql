@@ -1,0 +1,29 @@
+postgres=# \c vk_staging
+You are now connected to database "vk_staging" as user "postgres".
+vk_staging=# SELECT * FROM photo;
+
+ id |              url               | owner_id |                                                                description                                                                |     uploaded_at     |  size
+----+--------------------------------+----------+-------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------
+  1 | http://nytimes.com/user/110    |       17 | dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie                                                   | 2023-09-19 16:30:07 |  163831
+  2 | https://naver.com/site         |       10 | magna. Sed eu eros. Nam consequat                                                                                                         | 2022-08-23 20:16:16 |  147786
+  3 | https://naver.com/en-us        |       67 | Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et,                                                           | 2023-07-16 23:27:54 |  572807
+  4 | http://bbc.co.uk/user/110      |       84 | Nunc commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec                      | 2023-12-11 17:08:47 |   26014
+  5 | http://naver.com/user/110      |       19 | imperdiet, erat nonummy ultricies ornare, elit elit fermentum risus, at fringilla purus mauris a nunc.                                    | 2023-06-30 13:45:18 |   46338
+  6 | https://baidu.com/sub/cars     |       54 | adipiscing lobortis risus. In mi                                                                                                          | 2023-08-08 21:54:39 |  633760
+  7 | https://wikipedia.org/settings |       95 | senectus et                                                                                                                               | 2023-05-25 23:30:47 |  496361
+  8 | http://instagram.com/user/110  |       25 | ultricies                                                                                                                                 | 2023-02-23 13:08:54 |  810282
+  9 | http://reddit.com/group/9      |       69 | Donec egestas.                                                                                                                            | 2022-07-11 23:49:21 |  546439
+ 10 | http://wikipedia.org/en-us     |       14 | tellus sem mollis dui, in sodales elit                                                                                                    | 2022-08-06 05:46:08 |  512970
+ 11 | https://walmart.com/en-us      |       38 | sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus. Ut nec urna et arcu imperdiet             | 2023-07-01 06:28:17 |   40484
+ 12 | https://ebay.com/sub/cars      |       86 | eros non enim commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id,                 | 2023-04-23 09:56:48 | 1024938
+ 13 | http://nytimes.com/en-ca       |       76 | ac arcu. Nunc mauris. Morbi non sapien molestie orci tincidunt adipiscing. Mauris molestie pharetra nibh. Aliquam                         | 2023-09-27 09:30:36 |  366329
+ 14 | http://pinterest.com/site      |       24 | ullamcorper, nisl arcu iaculis                                                                                                            | 2022-12-12 05:30:33 |  747312
+ 15 | http://guardian.co.uk/group/9  |       18 | feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam auctor, velit eget laoreet posuere, enim nisl elementum purus, | 2023-05-05 14:07:38 |  757906
+ 16 | http://pinterest.com/sub       |       93 | non, luctus sit amet, faucibus ut, nulla.                                                                                                 | 2022-08-23 02:00:21 | 1011045
+ 17 | https://pinterest.com/en-us    |       61 | lorem, sit amet ultricies sem magna nec quam.                                                                                             | 2023-09-25 23:55:07 |  746586
+ 18 | http://youtube.com/sub         |       54 | Pellentesque ut ipsum ac mi eleifend                                                                                                      | 2022-06-02 01:51:38 |  287669
+ 19 | http://guardian.co.uk/user/110 |       41 | sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis                                   | 2024-01-08 05:40:47 |  367275
+ 20 | http://netflix.com/en-ca       |       40 | felis purus                                                                                                                               | 2022-11-30 01:02:27 |  979255
+(20 rows)
+
+(END)
